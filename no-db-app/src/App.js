@@ -25,6 +25,7 @@ class App extends Component {
     this.makeShiny = this.makeShiny.bind(this)
     this.askForPokemon = this.askForPokemon.bind(this)
     this.handleKeypress = this.handleKeypress.bind(this)
+    
 
   }
   handleInput(e) {
@@ -32,6 +33,7 @@ class App extends Component {
       userInput: e.target.value
     })
   }
+  
 
   askForPokemon() {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${this.state.userInput}`).then(res => {
@@ -55,47 +57,49 @@ class App extends Component {
     }
   }
   makeShiny() { this.state.shiny === 'shiny' ? this.setState({ shiny: 'normal' }) : this.setState({ shiny: 'shiny' }) }
-  
-render() {
-  return (
-    <div className="App" id="App-container">
-      <div className="app-header">SUPERCOOL POKE-API PROJECT</div>
-      <section className="app-body">
+
+  render() {
+    return (
+      <div className="App" id="App-container">
+        <div className="app-header">SUPERCOOL POKE-API PROJECT</div>
+        <section className="app-body">
 
 
-        {/*LEFT SIDE ================================================================================================  */}
-        <div className="app-left-side">
-          <div className="search-box">
-            <h3>Press enter to search</h3>
+          {/*LEFT SIDE ================================================================================================  */}
+          <div className="app-left-side">
+            <div className="search-box">
+              <h3>Press enter to search</h3>
 
-            <input placeholder="enter a pokemon" value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
-          </div>
-          <SearchHistory storedInput={this.state.storedInput} />
-        </div>
-
-
-
-
-        {/*RIGHT SIDE ================================================================================================  */}
-        <div className="app-right-side">
-          <h3>Pokedex</h3>
-          
-          <GetData userInput={this.state.userInput}
-            pokemon={this.state.pokemon} normalSprite={this.state.normalSprite}
-            shinySprite={this.state.shinySprite} type={this.state.type} makeShiny={this.makeShiny}
-            shiny={this.state.shiny} askForPokemon={this.askForPokemon} moves={this.state.moves}/>
+              <input placeholder="enter a pokemon" value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
+            </div>
+            <SearchHistory storedInput={this.state.storedInput} />
+            {/*SERVER TEST+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}
             
+          </div>
 
 
 
 
-        </div>
-        {/*================================================================================================  */}
-      </section>
+          {/*RIGHT SIDE ================================================================================================  */}
+          <div className="app-right-side">
+            <h3>Pokedex</h3>
 
-    </div>
-  );
-}
+            <GetData className="GetData" userInput={this.state.userInput}
+              pokemon={this.state.pokemon} normalSprite={this.state.normalSprite}
+              shinySprite={this.state.shinySprite} type={this.state.type} makeShiny={this.makeShiny}
+              shiny={this.state.shiny} askForPokemon={this.askForPokemon} moves={this.state.moves} />
+
+
+
+
+
+          </div>
+          {/*================================================================================================  */}
+        </section>
+
+      </div>
+    );
+  }
 }
 
 export default App;

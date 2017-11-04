@@ -8,7 +8,7 @@ body {
   background-image: url('./img/poke1.png');
 }
 #App-container {
-  height: 1200px;
+  height: 600px;
   width: 90vw;
   background: rgb(123, 255, 248);
   text-align: center;
@@ -17,6 +17,7 @@ body {
   color: rgb(61, 61, 61);
   display: block;
   margin: 80px 0;
+  border: solid 5px gray;
   
   
 
@@ -50,6 +51,12 @@ height: 100%;
 border: solid 1px gray;
 background: rgb(177, 255, 249);
 }
+
+.test-node-server-box{
+  height: 30vh;
+  background: yellowgreen;
+  width: 100%;
+}
 .app-right-side{
 width: 50%;
 height: 100%;
@@ -64,26 +71,33 @@ background: rgb(177, 255, 249);
   
 }
 /*  GetData Component ============================ */ 
+.GetData{
+  
+}
 #GetData-component{
-  
-}
-table {
-  display:block;
   width: 100%;
-  border: solid 2px gray;
-  height: 500px;
-  table-layout: fixed;
-}
-table, table td {
-  border: 5px solid rgb(65, 65, 65);
-  border-collapse: separate;
-  padding: 8px;
-}
-
-table td{
+  height: 95%;
+  border: solid 5px greenyellow;
   
-  width: 30%;
-  overflow-y: scroll;
-  max-height: 120px !important;
 }
-
+.left-data{
+  float: left;
+  border: solid 5px gray;
+  width: 60%;
+  height: 50%;
+  position: relative;
+}
+.button-bar{
+  display: flex;
+  width: 100%;
+  
+  position: absolute;
+  bottom: 0;
+}
+.right-data{
+  float: right;
+  width: 40%;
+  border: solid 5px gray;
+  overflow-y: auto;
+  height: 50%;
+}
