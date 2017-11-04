@@ -6,63 +6,87 @@ export default class SearchHistory extends Component {
         super(props)
         this.state = {
             toServer: '',
-            user: { name: '', favorites: [] }
+            user: { name: '', favorites: [] },
+            userIsLoggedIn: false,
+            input: ''
         }
-        this.serverData = this.serverData.bind(this)
-        this.serverKeyPress = this.serverKeyPress.bind(this)
+        this.pressedEnter = this.pressedEnter.bind(this)
         this.updateUser = this.updateUser.bind(this)
         this.usernameChange = this.usernameChange.bind(this)
     }
     doSomething() {
         alert('quo usque tandem?')
     }
-    serverData(e) {
-        this.setState({ toServer: e.target.value })
-    }
+
     usernameChange(e) {
         //set user in state
         this.setState({
-            user: { name: e.target.value }
+            input: e.target.value 
         })
-        console.log(`user.name: ${this.state.user.name}`)
+        
     }
-    updateUser(e) {
+    pressedEnter(e) {
         const { user } = this.state;
-        if (e.key === "Enter" && user.name.length !== 0){
+        if (e.key === "Enter" && this.state.input !== 0) {
+            //check if new user or login
+            if(document.getElementById('radio-new-user').checked){
+            //set user in state
             
-            //upload username to axios
-            axios.post('http://localhost:3001/test', { user }).then(res => console.log(`response from server: ${res}`))
-            
+            let { input } = this.state
+                this.setState({ user: { name: input}, input: '', userIsLoggedIn: true })
+                //here is where we send data back to app.js
+                this.props.userLoggedIn(this.state.userIsLoggedIn)
+                this.updateUser()
+        
+        } else alert('funtion not yet implemented')
         }
     }
-    serverKeyPress(e) {
-        const { toServer } = this.state;
-        if (e.key === "Enter" && toServer.length !== 0) {
-            axios.post(`http://localhost:3001/test`, { toServer }).then(res => console.log(`response from server: ${res}`))
-        }
+    updateUser(){
+        //upload username to axios
+        const { user } = this.state;
+        axios.post('http://localhost:3001/api/users', { user }).then(res => console.log(`response from server: ${res}`))
+        
     }
+
+    
     render() {
 
         return (
             <div id="SearchHistory-component">
-                <h1>Welcome: {this.state.user.name}</h1>
-                
+                <h1>{ this.state.user.name ?  `Welcome ${this.state.user.name}`  : 'Please login' }</h1>
+            
                 <div className="test-node-server-box">
-                    <input placeholder="enter username" 
+                    <input id="radio-new-user" type='radio' name='login' value='new user'/>
+                    <label for="radio-new-user">new user</label>
+                    <input id='radio-login' type='radio' name='login' value='login'/>
+                    <label for='radio-login'>login</label>
+                    
+                    <input placeholder="enter username" disabled={ this.state.userIsLoggedIn ? true : false }
                         onChange={this.usernameChange}
-                        onKeyPress={this.updateUser}
-                         />
-                    <input placeholder="send sth to server"
-                        onChange={this.serverData}
-                        onKeyPress={this.serverKeyPress}
-                        value={this.state.toServer} />
+                        onKeyPress={this.pressedEnter}
+                        value={this.state.input}
+                    /> {+this.props.addFavFlag} <button className="confirm-button" onClick={this.props.hitFavFlag}>hit flag</button>
+                    <div className="user-pokemon-container">
+                        
+                        <div className="user-pokemon-item"><button className="confirm-button">remove</button></div>
+                        <div className="user-pokemon-item"><button className="confirm-button">remove</button></div>
+                        <div className="user-pokemon-item"><button className="confirm-button">remove</button></div>
+                        <div className="user-pokemon-item"><button className="confirm-button">remove</button></div>
+                        <div className="user-pokemon-item"><button className="confirm-button">remove</button></div>
+                        
 
+                        
+
+
+                    </div>
+                    </div>
                 </div>
+            
 
 
 
 
-            </div>
+         
 
 
         )

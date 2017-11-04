@@ -19,21 +19,34 @@ class App extends Component {
       shinySprite: '',
       type: '',
       shiny: 'shiny',
-      moves: []
+      moves: [],
+      userLoggedIn: false,
+      addFavFlag: false
     }
+    this.hitFavFlag = this.hitFavFlag.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.makeShiny = this.makeShiny.bind(this)
     this.askForPokemon = this.askForPokemon.bind(this)
     this.handleKeypress = this.handleKeypress.bind(this)
+    this.userLoggedIn = this.userLoggedIn.bind(this)
     
 
   }
+  hitFavFlag(){
+    this.state.addFavFlag ? this.setState({ addFavFlag: false }) : this.setState({ addFavFlag: true })
+  }
+
   handleInput(e) {
     this.setState({
       userInput: e.target.value
     })
   }
-  
+  userLoggedIn(val){
+    
+    
+    this.setState({ userLoggedIn: true })
+    
+  }
 
   askForPokemon() {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${this.state.userInput}`).then(res => {
@@ -58,10 +71,14 @@ class App extends Component {
   }
   makeShiny() { this.state.shiny === 'shiny' ? this.setState({ shiny: 'normal' }) : this.setState({ shiny: 'shiny' }) }
 
+  
+
+
   render() {
+
     return (
       <div className="App" id="App-container">
-        <div className="app-header">SUPERCOOL POKE-API PROJECT</div>
+        <div className="app-header">SUPERCOOL POKE-API PROJECT {+this.state.userLoggedIn}{+this.state.addFavFlag}</div>
         <section className="app-body">
 
 
@@ -72,20 +89,21 @@ class App extends Component {
 
               <input placeholder="enter a pokemon" value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
             </div>
-            <SearchHistory storedInput={this.state.storedInput} />
+            <SearchHistory storedInput={this.state.storedInput} userLoggedIn={this.userLoggedIn} 
+            pokemon={this.state.pokemon} addFavFlag={this.state.addFavFlag} hitFavFlag={this.hitFavFlag} pokemon={this.state.pokemon}/>
             {/*SERVER TEST+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}
             
           </div>
 
 
-
+        
 
           {/*RIGHT SIDE ================================================================================================  */}
-          <div className="app-right-side">
+          <div className="app-right-side"> 
             <h3>Pokedex</h3>
 
-            <GetData className="GetData" userInput={this.state.userInput}
-              pokemon={this.state.pokemon} normalSprite={this.state.normalSprite}
+            <GetData className="GetData" userInput={this.state.userInput} userLoggedIn={this.state.userLoggedIn}
+            hitFavFlag={this.hitFavFlag}  pokemon={this.state.pokemon} normalSprite={this.state.normalSprite}
               shinySprite={this.state.shinySprite} type={this.state.type} makeShiny={this.makeShiny}
               shiny={this.state.shiny} askForPokemon={this.askForPokemon} moves={this.state.moves} />
 
