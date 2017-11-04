@@ -4,6 +4,7 @@ import './App.css';
 import './reset.css';
 import GetData from './components/GetData'
 import axios from 'axios';
+import SearchHistory from './components/SearchHistory'
 
 
 class App extends Component {
@@ -17,7 +18,8 @@ class App extends Component {
       normalSprite: '',
       shinySprite: '',
       type: '',
-      shiny: 'shiny'
+      shiny: 'shiny',
+      moves: []
     }
     this.handleInput = this.handleInput.bind(this)
     this.makeShiny = this.makeShiny.bind(this)
@@ -39,8 +41,10 @@ class App extends Component {
         pokemon: res.data,
         normalSprite: res.data.sprites.front_default,
         type: res.data.types[0].type.name,
-        shinySprite: res.data.sprites.front_shiny
+        shinySprite: res.data.sprites.front_shiny,
+        moves: res.data.moves
       })
+      {/*TODO IF already exists in stored INput, do not add*/ }
 
       console.log(this.state.pokemon)
     })
@@ -51,42 +55,47 @@ class App extends Component {
     }
   }
   makeShiny() { this.state.shiny === 'shiny' ? this.setState({ shiny: 'normal' }) : this.setState({ shiny: 'shiny' }) }
-  render() {
-    return (
-      <div className="App" id="App-container">
-        <h1 className="app-header">SUPERCOOL POKE-API PROJECT</h1>
-        <section className="app-body">
+  
+render() {
+  return (
+    <div className="App" id="App-container">
+      <div className="app-header">SUPERCOOL POKE-API PROJECT</div>
+      <section className="app-body">
 
 
-          {/*LEFT SIDE ================================================================================================  */}
-          <div className="app-left-side">
-            <h3>left side</h3>
-            <span>Search: </span>
-            <input value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
-            <SearchHistory storedInput={this.state.storedInput} />
+        {/*LEFT SIDE ================================================================================================  */}
+        <div className="app-left-side">
+          <div className="search-box">
+            <h3>Press enter to search</h3>
 
-
-
-
+            <input placeholder="enter a pokemon" value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
           </div>
-          {/*RIGHT SIDE ================================================================================================  */}
-          <div className="app-right-side">
-            <h3>right side</h3>
-            <span>Results:</span><GetData userInput={this.state.userInput}
-              pokemon={this.state.pokemon} normalSprite={this.state.normalSprite}
-              shinySprite={this.state.shinySprite} type={this.state.type} makeShiny={this.makeShiny}
-              shiny={this.state.shiny} askForPokemon={this.askForPokemon} />
+          <SearchHistory storedInput={this.state.storedInput} />
+        </div>
 
 
 
 
-          </div>
-          {/*================================================================================================  */}
-        </section>
+        {/*RIGHT SIDE ================================================================================================  */}
+        <div className="app-right-side">
+          <h3>Pokedex</h3>
+          
+          <GetData userInput={this.state.userInput}
+            pokemon={this.state.pokemon} normalSprite={this.state.normalSprite}
+            shinySprite={this.state.shinySprite} type={this.state.type} makeShiny={this.makeShiny}
+            shiny={this.state.shiny} askForPokemon={this.askForPokemon} moves={this.state.moves}/>
+            
 
-      </div>
-    );
-  }
+
+
+
+        </div>
+        {/*================================================================================================  */}
+      </section>
+
+    </div>
+  );
+}
 }
 
 export default App;

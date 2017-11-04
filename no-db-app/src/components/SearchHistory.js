@@ -1,32 +1,33 @@
 import React, { Component } from 'react'
 
 export default class SearchHistory extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
     }
-render(){
-    return(
-        <div id="SearchHistory-component">
-            <h1>Recent searches:</h1>
-            <ul>
-                {
-                    let x = this.props.storedInput.slice(0)
-                    x.map((e, i)=>{
-                        <li key={i}>{e}</li>
-                    })
-                }
-            </ul>
+    doSomething() {
+        alert('quo usque tandem?')
+    }
+    render() {
 
+        return (
+            <div id="SearchHistory-component">
+                <h1>Recent searches:</h1>
+                <ul>
+                    {
 
-
-        </div>
-
-
-    )
-}
+                        this.props.storedInput.map((e, i) => (
+                            <li key={i} onClick={this.doSomething}>{e}</li>
+                        ))
+                    }
+                </ul>
 
 
 
 
+            </div>
+
+
+        )
+    }
 }

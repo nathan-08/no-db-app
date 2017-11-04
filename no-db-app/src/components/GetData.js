@@ -8,21 +8,23 @@ export default class GetData extends Component {
             x: 'x',
         }
     }
-    render(){
-        return(
+    render() {
+        return (
             <div id="GetData-component">
-            <button className="confirm-button" onClick={this.props.askForPokemon}>Get Poke-data</button>
-    <table className="pokemon-display-table">
-        <tr>
-            <th>Name: {this.props.pokemon.name} </th>
-            <td>type: {this.props.type} </td>
-            <td>sprite: 
-                <img  className="sprite-img" src={this.props.shiny === 'shiny' ? this.props.normalSprite : this.props.shinySprite} alt=""/>
+                <table className="pokemon-display-table">
+                    <tr>
+                        <td>Name: {this.props.pokemon.name} </td>
+                        <td>type: {this.props.type} </td>
+                        <td>sprite:
+                <img className="sprite-img" src={this.props.shiny === 'shiny' ? this.props.normalSprite : this.props.shinySprite} alt="" />
                 <button className="confirm-button" onClick={this.props.makeShiny}>{this.props.shiny}</button>
-            </td>
-        </tr>
-    </table>
-    </div>
-    )    
-}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="moves-window">moves: {this.props.moves.map(e=>`${e.move.name}\n`)} </td>
+                    </tr>
+                </table>
+            </div>
+        )
+    }
 } /* close component */ 
