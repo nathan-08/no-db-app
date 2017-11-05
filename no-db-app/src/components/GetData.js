@@ -28,7 +28,23 @@ export default class GetData extends Component {
                 <div className="right-data">
                         <div className="moves-window">moves: <ul> {this.props.moves.map((e,i)=><li key={i}>{e.move.name}</li>)} </ul></div>
                 </div>
-                
+                {/*---------------secondary pokemon display--------------------*/}
+                <div className="left-data">
+                    
+                        <div>Name: {this.props.pokemon01.name} </div>
+                        <div>type: {this.props.type01} </div>
+                        <div> 
+                <img className="sprite-img" src={this.props.normalSprite01} alt="" />
+                <span className="button-bar">
+                <button className="confirm-button" disabled onClick={this.props.makeShiny}>{this.props.shiny}</button>
+                <button className="confirm-button" disabled 
+                    onClick={this.props.hitFavFlag}>Favorites</button>
+                </span>        
+                        </div>
+                </div>    
+                <div className="right-data">
+                        <div className="moves-window">moves: <ul> {this.props.moves01.map((e,i)=><li key={i}>{e.move.name}</li>)} </ul></div>
+                </div>
             </div>
         )
     }

@@ -11,11 +11,13 @@ export default class SearchHistory extends Component {
             userIsLoggedIn: false,
             input: ''
         }
+        this.releasePoke = this.releasePoke.bind(this)
         this.pressedEnter = this.pressedEnter.bind(this)
         this.addNewUser = this.addNewUser.bind(this)
         this.usernameChange = this.usernameChange.bind(this)
         this.getUser = this.getUser.bind(this)
         this.updateUser = this.updateUser.bind(this)
+        this.logOut = this.logOut.bind(this)
     }
     doSomething() {
         alert('quo usque tandem?')
@@ -26,7 +28,6 @@ export default class SearchHistory extends Component {
         this.setState({
             input: e.target.value
         })
-
     }
     pressedEnter(e) {
         const { user } = this.state;
@@ -35,29 +36,40 @@ export default class SearchHistory extends Component {
             if (document.getElementById('radio-new-user').checked) {
 
                 this.addNewUser()
-                this.props.userLoggedIn(this.state.userIsLoggedIn)
-            } else {
+
+            } else if (document.getElementById('radio-login').checked) {
                 this.getUser()
-                this.props.userLoggedIn(this.state.userIsLoggedIn)
-            }
+
+            } else (alert('please select new user or login')); this.setState({ input: '' })
         }
     }
     getUser() {
         let { input } = this.state
 
+
         axios.get(`http://localhost:3001/api/users/${input}`).then(res => {
-            this.setState({ user: res.data, input: '', userIsLoggedIn: true })
+            if (res.data !== false) {
+                this.setState({ user: res.data, input: '', userIsLoggedIn: true })
+                this.props.userLoggedIn(true)
+            } else {
+                this.setState({ input: '' })
+                alert('no such user exists')
+            }
         })
     }
     addNewUser() {
         //upload username to axios
         let { input } = this.state
-
-
         const user = { name: input, pokemon: [] }
         axios.post('http://localhost:3001/api/users', { user }).then(res => {
-            this.setState({ user: res.data, input: '', userIsLoggedIn: true })
-            console.log(res.data)
+            if (res.data !== false) {
+                this.setState({ user: res.data, input: '', userIsLoggedIn: true })
+                this.props.userLoggedIn(true)
+                console.log(res.data)
+            } else {
+                this.setState({ input: '' })
+                alert('user already exists')
+            }
         })
     }
     updateUser() {
@@ -74,38 +86,59 @@ export default class SearchHistory extends Component {
         if (this.props.addFavFlag) {
             //put to server user with user.favorites[this.props.pokemon.name]
             this.props.hitFavFlag()
-            if (this.state.user.pokemon.length < 7) {
+            if (this.state.user.pokemon.length < 6) {
                 console.log(`user pokes num: ${this.state.user.pokemon.length}`)
                 this.updateUser()
             } else alert(`Limit: 6 Pokemon per trainer`)
         }
     }
+    logOut() {
+        // set state user to default
+        this.setState({ user: { name: '', pokemon: [], num: 3 }, userIsLoggedIn: false })
+        // set state userIsLoggedIn to false
+        // call props function to alert app.js that userLoggedIn is false
+        this.props.userLoggedIn(false)
+        console.log(`user logged in: ${this.state.userIsLoggedIn}`)
+    }
+    releasePoke(poke) {
+        Function.prototype()
+        //do a put call to node to remove 'poke' from user.pokemon[]
+        ///api/users/:user/:poke
+        // this is messy: consider updating the user object on this side, before sending to node server
+        axios.put(`http://localhost:3001/api/users/${this.state.user.name}/${poke}`).then(res => {
+            this.setState({ user: res.data })
+        })
+    }
+
     render() {
 
         return (
             <div id="SearchHistory-component">
                 <div className="user-header">
-                <h1>{this.state.user.name ? `Welcome ${this.state.user.name}` : 'Please login'}   {this.state.user.id}</h1>
-                <button className="confirm-button" id="logout-button">Logout</button>
+
+                    <h1>{this.state.user.name ? `Welcome ${this.state.user.name}` : 'Please login'} </h1>
+                    <button className="confirm-button" id="logout-button" onClick={this.logOut}>LOGOUT {+this.state.userIsLoggedIn}</button>
                 </div>
                 <div className="test-node-server-box">
-                    <input id="radio-new-user" type='radio' name='login' value='new user' checked />
+                    <input className='radio' id="radio-new-user" type='radio' name='login' value='new user' />
                     <label for="radio-new-user">new user</label>
-                    <input id='radio-login' type='radio' name='login' value='login' />
+                    <input className='radio' id='radio-login' type='radio' name='login' value='login' />
                     <label for='radio-login'>login</label>
 
                     <input placeholder="enter username" disabled={this.state.userIsLoggedIn ? true : false}
                         onChange={this.usernameChange}
                         onKeyPress={this.pressedEnter}
                         value={this.state.input}
-                    /> {+this.props.addFavFlag} <button className="confirm-button" onClick={this.props.hitFavFlag}>hit flag</button>
+                    />
                     <div className="user-pokemon-container">
 
                         {/* map through this.state.user.pokemon   */}
-                        {
+                        {this.state.userIsLoggedIn ?
                             this.state.user.pokemon.map((e, i) => (
-                                <div key={i} className="user-pokemon-item"><img src={pokeball} alt='pb' height="20" width="20" /><p>{e}</p><button className="confirm-button">remove</button></div>
-                            ))
+                                <div key={i} className="user-pokemon-item" ><img src={pokeball} alt='pb' height="20" width="20" onClick={() => this.props.askForPokemon(1, e)} /><p>{e}</p>
+                                    <button className="confirm-button" onClick={() => this.releasePoke(e)}>release</button></div>
+                            )) : Function.prototype()
+
                         }
 
 
