@@ -1,15 +1,16 @@
 // USER CONTROLLER //
 
 user_array = [] //this is an array of users with properties name, favorites, id
-userID = 0
+userID = 1
 
 module.exports = {
 
     create: (req, res) => {
         let { user } = req.body
-        user_array.push( user )
-        res.status(200).send( user_array )
-        console.log(`user_array updated: ${user_array[0].name}`)
+        let userWithID = Object.assign({}, {id: userID}, user )
+        user_array.push( userWithID )
+        res.status(200).send( userWithID )
+        console.log(`fav num: ${req.body.user.name}, id: ${userWithID.id}`)
     }
 
 
