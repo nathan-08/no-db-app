@@ -51,6 +51,7 @@ export default class SearchHistory extends Component {
             if (res.data !== false) {
                 this.setState({ user: res.data, input: '', userIsLoggedIn: true })
                 this.props.userLoggedIn(true)
+                this.props.setUnameId(this.state.user.name, this.state.user.id);
             } else {
                 this.setState({ input: '' })
                 alert('no such user exists')
@@ -65,7 +66,8 @@ export default class SearchHistory extends Component {
             if (res.data !== false) {
                 this.setState({ user: res.data, input: '', userIsLoggedIn: true })
                 this.props.userLoggedIn(true)
-                console.log(res.data)
+                this.props.setUnameId(this.state.user.name, this.state.user.id);
+                
             } else {
                 this.setState({ input: '' })
                 alert('user already exists')
@@ -116,8 +118,8 @@ export default class SearchHistory extends Component {
             <div id="SearchHistory-component">
                 <div className="user-header">
 
-                    <h1>{this.state.user.name ? `Welcome ${this.state.user.name}` : 'Please login'} </h1>
-                    <button className="confirm-button" id="logout-button" onClick={this.logOut}>LOGOUT {+this.state.userIsLoggedIn}</button>
+                    <h1 className="login-h1">{this.state.user.name ? `Welcome, ${this.state.user.name}` : 'Please login'} </h1>
+                    <button className="confirm-button" id="logout-button" onClick={this.logOut} disabled={this.state.userIsLoggedIn ? false : true}>LOGOUT</button>
                 </div>
                 <div className="test-node-server-box">
                     <input className='radio' id="radio-new-user" type='radio' name='login' value='new user' />
@@ -135,8 +137,10 @@ export default class SearchHistory extends Component {
                         {/* map through this.state.user.pokemon   */}
                         {this.state.userIsLoggedIn ?
                             this.state.user.pokemon.map((e, i) => (
-                                <div key={i} className="user-pokemon-item" ><img src={pokeball} alt='pb' height="20" width="20" onClick={() => this.props.askForPokemon(1, e)} /><p>{e}</p>
-                                    <button className="confirm-button" onClick={() => this.releasePoke(e)}>release</button></div>
+                                <div key={i} className="user-pokemon-item" ><img src={pokeball} alt='pb' height="20" width="20"
+                                    onClick={() => this.props.askForPokemon(1, e)} /><p>{e}</p>
+                                    <button className="confirm-button" onClick={() => this.releasePoke(e)}>release</button>
+                                </div>
                             )) : Function.prototype()
 
                         }

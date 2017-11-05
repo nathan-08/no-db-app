@@ -34,9 +34,10 @@ body {
 }
 .search-box{
   padding: 28px;
-  margin-bottom: 18px;
-  margin-top: 24px;
-  border: solid 5px rgb(61,61,61);
+  background: rgb(123, 255, 248);
+  
+  border-top: solid 5px gray;
+  border-bottom: solid 5px gray;
 }
 .app-body{
   width: 100%;
@@ -48,19 +49,24 @@ body {
 .app-left-side{
 width: 50%;
 height: 100%;
-border: solid 1px gray;
-background: rgb(177, 255, 249);
-}
 
-.test-node-server-box{
-  height: 100%;
-  background: yellowgreen;
+background: yellowgreen;
+}
+.left-side-header{
   width: 100%;
+  background: rgb(177, 255, 249);
+}
+.test-node-server-box{
+  height: 95%;
+  
+  width: 100%;
+  margin-top: 12px;
+  border-top: solid 5px gray;
 }
 .app-right-side{
 width: 50%;
 height: 100%;
-border: solid 1px gray;
+
 background: rgb(177, 255, 249);
 
 }
@@ -76,13 +82,14 @@ background: rgb(177, 255, 249);
 }
 #GetData-component{
   width: 100%;
-  height: 95%;
-  border: solid 5px greenyellow;
+  height: 97%;
+  
   
 }
 .left-data{
   float: left;
-  border: solid 5px gray;
+  border-top: solid 5px gray;
+  border-left: solid 5px gray;
   width: 60%;
   height: 50%;
   position: relative;
@@ -90,20 +97,26 @@ background: rgb(177, 255, 249);
 .button-bar{
   display: flex;
   width: 100%;
-  
+  justify-content: space-around;
   position: absolute;
   bottom: 0;
+  padding-bottom: 8px;
+  
 }
 .right-data{
   float: right;
   width: 40%;
-  border: solid 5px gray;
+  border-top: solid 5px gray;
+  border-left: solid 5px gray;
   overflow-y: auto;
   height: 50%;
 }
 
 #SearchHistory-component{
   height: 60vh;
+}
+.login-h1{
+  margin-top: 10px;
 }
 
 .user-pokemon-container{

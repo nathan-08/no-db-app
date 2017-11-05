@@ -16,12 +16,12 @@ export default class GetData extends Component {
                     
                         <div>Name: {this.props.pokemon.name} </div>
                         <div>type: {this.props.type} </div>
-                        <div> {+this.props.userLoggedIn}
+                        <div> 
                 <img className="sprite-img" src={this.props.shiny === 'shiny' ? this.props.normalSprite : this.props.shinySprite} alt="" />
                 <span className="button-bar">
                 <button className="confirm-button" onClick={this.props.makeShiny}>{this.props.shiny}</button>
                 <button className="confirm-button" disabled={this.props.userLoggedIn && ( this.props.pokemon.name )  ? false : true }
-                    onClick={this.props.hitFavFlag}>Favorites</button>
+                    onClick={this.props.hitFavFlag}>Catch!</button>
                 </span>        
                         </div>
                 </div>    
@@ -36,9 +36,7 @@ export default class GetData extends Component {
                         <div> 
                 <img className="sprite-img" src={this.props.normalSprite01} alt="" />
                 <span className="button-bar">
-                <button className="confirm-button" disabled onClick={this.props.makeShiny}>{this.props.shiny}</button>
-                <button className="confirm-button" disabled 
-                    onClick={this.props.hitFavFlag}>Favorites</button>
+                
                 </span>        
                         </div>
                 </div>    
