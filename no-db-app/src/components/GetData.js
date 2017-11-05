@@ -26,7 +26,7 @@ export default class GetData extends Component {
                         </div>
                 </div>    
                 <div className="right-data">
-                        <div className="moves-window">moves: <ul> {this.props.moves.map(e=><li>{e.move.name}</li>)} </ul></div>
+                        <div className="moves-window">moves: <ul> {this.props.moves.map((e,i)=><li key={i}>{e.move.name}</li>)} </ul></div>
                 </div>
                 
             </div>

@@ -115,4 +115,13 @@ background: rgb(177, 255, 249);
   height: 35px;
   background: rgb(123, 210, 250);
   border: solid 3px gray;
+  display: flex;
+  justify-content: space-between;
+  
+}
+.user-pokemon-item img{
+  margin: 5px;
+}
+.user-pokemon-item p{
+  text-align: left;
 }

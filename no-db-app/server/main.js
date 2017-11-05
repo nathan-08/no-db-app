@@ -19,6 +19,8 @@ app.get('/test', ( req, res )=> {
 app.post('/test', test_controller.create)
 
 app.post('/api/users', user_controller.create)
+app.get('/api/users/:name', user_controller.read)
+app.put('/api/users/:name', user_controller.update)
 
 
 
