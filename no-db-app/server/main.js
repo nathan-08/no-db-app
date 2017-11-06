@@ -1,18 +1,18 @@
-const   app = require('express')(),
-        bodyParser = require('body-parser'),
-        cors = require('cors'),
-        port = 3001;
-        test_controller = require('./controllers/test_controller.js')
-        user_controller = require('./controllers/user_controller.js')
+const app = require('express')(),
+    bodyParser = require('body-parser'),
+    cors = require('cors'),
+    port = 3001;
+test_controller = require('./controllers/test_controller.js')
+user_controller = require('./controllers/user_controller.js')
 
-        app.use(bodyParser.json())
-        app.use(cors());
+app.use(bodyParser.json())
+app.use(cors());
 
 /*==+==+==END_SERVER_SETUP==+==+==+==+==+==+==+==+==+==+==+==*/
 
-app.listen(port, ()=>console.log(`Listening on port: ${3001}`))
+app.listen(port, () => console.log(`Listening on port: ${3001}`))
 
-app.get('/test', ( req, res )=> {
+app.get('/test', (req, res) => {
     res.status(200).send('working')
 })
 

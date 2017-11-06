@@ -29,7 +29,9 @@ body {
   font-weight: bold;
   text-align: center;
   background: rgba(255, 255, 255, 0);
-  
+  align-items: center;
+  display: flex;
+  justify-content: center;
   
 }
 .search-box{
@@ -71,13 +73,16 @@ background: rgb(177, 255, 249);
 
 }
 .confirm-button{
-  height: 30px;
+  height: 24px;
   width: 120px;
   margin: 0;
   border: none;
   background: rgb(153, 153, 153);
   font-family: monospace;
   font-weight: bold;
+  margin-right: 10px;
+  border-bottom: 3px solid gray;
+  border-right: 4px solid gray;
   
 }
 /*  GetData Component ============================ */ 
@@ -144,6 +149,16 @@ background: rgb(177, 255, 249);
   text-align: left;
 }
 
+
+.input-box {
+  font-family: monospace;
+  margin: 0 8px;
+  text-align: center;
+  font-weight: bold;
+}
+.input-box:focus{
+  outline: none;
+}
 /* Animations */
 
 .confirm-button {
@@ -158,4 +173,12 @@ background: rgb(177, 255, 249);
 }
 .confirm-button:focus {
   outline: none;
+}
+.music-player{
+  display: flex;
+  justify-content: space-around;
+}
+.music-box{
+  display: flex;
+  justify-content: space-around;
 }

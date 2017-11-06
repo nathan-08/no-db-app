@@ -5,12 +5,13 @@
   "dependencies": {
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",
-    "proxy": "https://localhost:3001",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "proxy": "https://localhost:3001",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.16"
+    "react-scripts": "1.0.16",
+    "react-sound": "^0.8.0"
   },
   "scripts": {
     "start": "react-scripts start",

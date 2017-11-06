@@ -5,6 +5,7 @@ import './reset.css';
 import GetData from './components/GetData'
 import axios from 'axios';
 import SearchHistory from './components/SearchHistory'
+import MusicBox from './components/MusicBox'
 
 
 class App extends Component {
@@ -137,7 +138,7 @@ class App extends Component {
             <div className="search-box">
               <h3>Press enter to search</h3>
 
-              <input placeholder="enter a pokemon" value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
+              <input className='input-box' placeholder="enter a pokemon" value={this.state.userInput} onChange={this.handleInput} onKeyPress={this.handleKeypress} />
             </div>
             <SearchHistory storedInput={this.state.storedInput} userLoggedIn={this.userLoggedIn}
               pokemon={this.state.pokemon} addFavFlag={this.state.addFavFlag} hitFavFlag={this.hitFavFlag}
@@ -151,7 +152,7 @@ class App extends Component {
 
           {/*RIGHT SIDE ================================================================================================  */}
           <div className="app-right-side">
-            <h3>Pokedex</h3>
+            <h3 className="music-player" >Music Player: <MusicBox /></h3> 
 
             <GetData className="GetData" userInput={this.state.userInput} userLoggedIn={this.state.userLoggedIn}
               hitFavFlag={this.hitFavFlag} makeShiny={this.makeShiny} shiny={this.state.shiny} askForPokemon={this.askForPokemon}

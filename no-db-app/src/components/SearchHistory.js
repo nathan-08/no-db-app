@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import pokeball from './../img/pokeball.png'
+const url = '216.21.163.235:3001';
 
 export default class SearchHistory extends Component {
     constructor(props) {
@@ -67,7 +68,7 @@ export default class SearchHistory extends Component {
                 this.setState({ user: res.data, input: '', userIsLoggedIn: true })
                 this.props.userLoggedIn(true)
                 this.props.setUnameId(this.state.user.name, this.state.user.id);
-                
+
             } else {
                 this.setState({ input: '' })
                 alert('user already exists')
@@ -127,7 +128,7 @@ export default class SearchHistory extends Component {
                     <input className='radio' id='radio-login' type='radio' name='login' value='login' />
                     <label for='radio-login'>login</label>
 
-                    <input placeholder="enter username" disabled={this.state.userIsLoggedIn ? true : false}
+                    <input className="input-box" placeholder="enter username" disabled={this.state.userIsLoggedIn ? true : false}
                         onChange={this.usernameChange}
                         onKeyPress={this.pressedEnter}
                         value={this.state.input}
@@ -142,26 +143,10 @@ export default class SearchHistory extends Component {
                                     <button className="confirm-button" onClick={() => this.releasePoke(e)}>release</button>
                                 </div>
                             )) : Function.prototype()
-
                         }
-
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
         )
     }
 }
