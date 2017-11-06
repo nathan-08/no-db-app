@@ -119,6 +119,8 @@ background: rgb(177, 255, 249);
   border-left: solid 5px gray;
   overflow-y: auto;
   height: 50%;
+  text-align: left;
+  padding-left: 18px;
 }
 
 #SearchHistory-component{
