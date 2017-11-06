@@ -16,6 +16,7 @@ export default class GetData extends Component {
                     
                         <div>Name: {this.props.pokemon.name} </div>
                         <div>type: {this.props.type} </div>
+                        <div>weight: {this.props.weight}</div>
                         <div> 
                 <img className="sprite-img" src={this.props.shiny === 'shiny' ? this.props.normalSprite : this.props.shinySprite} alt="" />
                 <span className="button-bar">
@@ -33,6 +34,7 @@ export default class GetData extends Component {
                     
                         <div>Name: {this.props.pokemon01.name} </div>
                         <div>type: {this.props.type01} </div>
+                        <div>weight: {this.props.weight01}</div>
                         <div> 
                 <img className="sprite-img" src={this.props.normalSprite01} alt="" />
                 <span className="button-bar">

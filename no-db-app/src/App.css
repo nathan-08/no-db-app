@@ -71,9 +71,13 @@ background: rgb(177, 255, 249);
 
 }
 .confirm-button{
-  height: 26px;
+  height: 30px;
   width: 120px;
   margin: 0;
+  border: none;
+  background: rgb(153, 153, 153);
+  font-family: monospace;
+  font-weight: bold;
   
 }
 /*  GetData Component ============================ */ 
@@ -130,6 +134,7 @@ background: rgb(177, 255, 249);
   border: solid 3px gray;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   
 }
 .user-pokemon-item img{
@@ -137,4 +142,20 @@ background: rgb(177, 255, 249);
 }
 .user-pokemon-item p{
   text-align: left;
+}
+
+/* Animations */
+
+.confirm-button {
+  -webkit-transition-duration: 0.2s;
+  transition-duration: .2s;
+
+}
+.confirm-button:hover {
+  background-color: rgb(1, 169, 175);
+  
+  
+}
+.confirm-button:focus {
+  outline: none;
 }

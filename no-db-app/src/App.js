@@ -18,6 +18,7 @@ class App extends Component {
       normalSprite: '',
       shinySprite: '',
       type: '',
+      weight: null,
       shiny: 'shiny',
       moves: [],
       userLoggedIn: false,
@@ -27,6 +28,7 @@ class App extends Component {
       normalSprite01: '',
       shinySprite01: '',
       type01: '',
+      weight01: null,
       moves01: [],
       uNameID: []
 
@@ -69,7 +71,8 @@ class App extends Component {
           normalSprite01: res.data.sprites.front_default,
           type01: res.data.types[0].type.name,
           shinySprite01: res.data.sprites.front_shiny,
-          moves01: res.data.moves
+          moves01: res.data.moves,
+          weight01: res.data.weight
         })
       })
     } else {
@@ -81,7 +84,8 @@ class App extends Component {
           normalSprite: res.data.sprites.front_default,
           type: res.data.types[0].type.name,
           shinySprite: res.data.sprites.front_shiny,
-          moves: res.data.moves
+          moves: res.data.moves,
+          weight: res.data.weight
         }); console.log(res.data)
       })
     }
@@ -157,12 +161,14 @@ class App extends Component {
               shinySprite={this.state.shinySprite}
               type={this.state.type}
               moves={this.state.moves}
+              weight={this.state.weight}
               // secondary set pokemon data
               pokemon01={this.state.pokemon01}
               normalSprite01={this.state.normalSprite01}
               shinySprite01={this.state.shinySprite01}
               type01={this.state.type01}
               moves01={this.state.moves01}
+              weight01={this.state.weight01}
             />
 
 
